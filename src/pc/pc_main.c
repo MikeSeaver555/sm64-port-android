@@ -186,7 +186,7 @@ void main_func(void) {
 #else
     const char *gamedir = SDL_AndroidGetExternalStoragePath();
 #endif
-    const char *userpath = gCLIOpts.SavePath[0] ? gCLIOpts.SavePath : sys_user_path();
+    const char *userpath = gCLIOpts.SavePath[0] ? gCLIOpts.SavePath : SDL_AndroidGetExternalStoragePath();
     fs_init(sys_ropaths, gamedir, userpath);
 
     configfile_load(configfile_name());
