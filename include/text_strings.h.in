@@ -95,6 +95,7 @@
 #define TEXT_MYSCORE _("マイスコア")
 #define TEXT_CONTINUE _("つづけて　マリオする？")
 #define TEXT_EXIT_GAME _("ゲームをしゅうりょうする")
+#define TEXT_RESET_GAME _("RESET GAME")
 #define TEXT_EXIT_COURSE _("コースからでる？")
 #define TEXT_CAMERA_ANGLE_R _("Ｒボタンのカメラきりかえ")
 
@@ -196,6 +197,7 @@
 #define TEXT_CONTINUE _("CONTINUE")
 #define TEXT_EXIT_COURSE _("EXIT COURSE")
 #define TEXT_EXIT_GAME _("EXIT GAME")
+#define TEXT_RESET_GAME _("RESET GAME")
 #ifndef VERSION_EU // "R" text is different in EU
 #define TEXT_CAMERA_ANGLE_R _("SET CAMERA ANGLE WITH R")
 #endif

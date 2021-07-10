@@ -54,9 +54,9 @@ static const u8 menuStr[][32] = {
     { TEXT_OPT_CONTROLS },
     { TEXT_OPT_VIDEO },
     { TEXT_OPT_AUDIO },
+    { TEXT_RESET_GAME },
     { TEXT_EXIT_GAME },
     { TEXT_OPT_CHEATS },
-
 };
 
 static const u8 optsCameraStr[][32] = {
@@ -204,6 +204,27 @@ static void optmenu_act_exit(UNUSED struct Option *self, s32 arg) {
     if (!arg) game_exit(); // only exit on A press and not directions
 }
 
+//
+// RESET GAME
+//
+
+extern char gDialogBoxState;
+extern short gMenuMode;
+void unpause_game() {
+    level_set_transition(0, 0);
+    play_sound(SOUND_MENU_PAUSE_2, gDefaultSoundArgs);
+    gDialogBoxState = 0;
+    gMenuMode = -1;
+}
+
+static void optmenu_reset_game(UNUSED struct Option *self, s32 arg) {
+    if (!arg) {
+        optmenu_toggle();
+        unpause_game();
+        fade_into_special_warp(-2, 0); // only exit on A press and not directions
+    }
+}
+
 static void optvideo_reset_window(UNUSED struct Option *self, s32 arg) {
     if (!arg) {
         // Restrict reset to A press and not directions
@@ -292,7 +313,7 @@ static struct SubMenu menuCamera   = DEF_SUBMENU( menuStr[4], optsCamera );
 static struct SubMenu menuControls = DEF_SUBMENU( menuStr[5], optsControls );
 static struct SubMenu menuVideo    = DEF_SUBMENU( menuStr[6], optsVideo );
 static struct SubMenu menuAudio    = DEF_SUBMENU( menuStr[7], optsAudio );
-static struct SubMenu menuCheats   = DEF_SUBMENU( menuStr[9], optsCheats );
+static struct SubMenu menuCheats   = DEF_SUBMENU( menuStr[10], optsCheats );
 
 /* main options menu definition */
 
@@ -303,9 +324,10 @@ static struct Option optsMain[] = {
     DEF_OPT_SUBMENU( menuStr[5], &menuControls ),
     DEF_OPT_SUBMENU( menuStr[6], &menuVideo ),
     DEF_OPT_SUBMENU( menuStr[7], &menuAudio ),
-    DEF_OPT_BUTTON ( menuStr[8], optmenu_act_exit ),
+    DEF_OPT_BUTTON ( menuStr[8], optmenu_reset_game ),
+    DEF_OPT_BUTTON ( menuStr[9], optmenu_act_exit ),
     // NOTE: always keep cheats the last option here because of the half-assed way I toggle them
-    DEF_OPT_SUBMENU( menuStr[9], &menuCheats )
+    DEF_OPT_SUBMENU( menuStr[10], &menuCheats )
 };
 
 static struct SubMenu menuMain = DEF_SUBMENU( menuStr[3], optsMain );
