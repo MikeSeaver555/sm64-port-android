@@ -1,0 +1,62 @@
+# Super Mario 64 save file
+# Comment starts with #
+# True = 1, False = 0
+# 2020-08-18 21:01:32
+
+[menu]
+coin_score_age = 0
+sound_mode = stereo
+
+[flags]
+wing_cap = 1
+metal_cap = 1
+vanish_cap = 1
+key_1 = 1
+key_2 = 1
+basement_door = 1
+upstairs_door = 1
+ddd_moved_back = 1
+moat_drained = 1
+pps_door = 1
+wf_door = 1
+ccm_door = 1
+jrb_door = 1
+bitdw_door = 1
+bitfs_door = 1
+50star_door = 1
+
+[courses]
+bob = "127, 1111111, 0"
+wf = "127, 1111111, 0"
+jrb = "127, 1111111, 0"
+ccm = "127, 1111111, 0"
+bbh = "127, 1111111, 0"
+hmc = "9, 1111111, 0"
+lll = "18, 1111111, 0"
+ssl = "7, 1111111, 0"
+ddd = "12, 1111111, 0"
+sl = "8, 1111111, 0"
+wdw = "7, 1111111, 0"
+ttm = "7, 1111111, 0"
+thi = "7, 1111111, 0"
+ttc = "7, 1111111, 0"
+rr = "7, 1111111, 0"
+
+[bonus]
+bitdw = 1
+bitfs = 1
+bits = 1
+pss = 11
+cotmc = 1
+totwc = 1
+vcutm = 1
+wmotr = 1
+sa = 1
+hub = 11111
+
+[cap]
+
+[sgi]
+keys = "1111111111"
+character = "0"
+coins = "111111"
