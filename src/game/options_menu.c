@@ -104,6 +104,7 @@ static const u8 optsCheatsStr[][64] = {
     { TEXT_OPT_CHEAT9 },
     { TEXT_OPT_CHEAT10 },
     { TEXT_OPT_CHEAT11 },
+    { TEXT_OPT_CHEAT12 },
 };
 
 static const u8 bindStr[][32] = {
@@ -141,6 +142,18 @@ static const u8 optsBLJCheatStr[][32] = {
     { TEXT_OPT_BLJCHT11 },
     { TEXT_OPT_BLJCHT12 },
     { TEXT_OPT_BLJCHT13 },
+};
+
+static const u8 optsStayInLevelStr[][32] = {
+    { TEXT_CHEAT_STAY1 },
+    { TEXT_CHEAT_STAY2 },
+    { TEXT_CHEAT_STAY3 },
+};
+
+static const u8 *stayInLevelChoices[] = {
+    optsStayInLevelStr[0],
+    optsStayInLevelStr[1],
+    optsStayInLevelStr[2],
 };
 
 static const u8 *filterChoices[] = {
@@ -255,7 +268,7 @@ static void optmenu_reset_game(UNUSED struct Option *self, s32 arg) {
         optmenu_toggle();
         unpause_game();
         fade_into_special_warp(-2, 0); // only exit on A press and not directions
-    }
+	}
 }
 
 static void optvideo_reset_window(UNUSED struct Option *self, s32 arg) {

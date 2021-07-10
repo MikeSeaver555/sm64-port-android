@@ -13,6 +13,7 @@ struct CheatList {
     bool         ExitAnywhere;
     bool         HugeMario;
     bool         TinyMario;
+    unsigned int NON;
     bool         LevelReset;
     unsigned int BLJAnywhere;
 };
