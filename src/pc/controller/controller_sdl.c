@@ -66,6 +66,15 @@ static inline void controller_add_binds(const u32 mask, const u32 *btns) {
     }
 }
 
+int GetJoystickNumAxes(int index) {
+    SDL_Joystick *joy = SDL_JoystickOpen(index);
+    int numAxes = SDL_JoystickNumAxes(joy);
+    if (SDL_JoystickGetAttached(joy)) {
+        SDL_JoystickClose(joy);
+    }
+    return numAxes;
+}
+
 static void controller_sdl_bind(void) {
     bzero(joy_binds, sizeof(joy_binds));
     bzero(mouse_binds, sizeof(mouse_binds));
@@ -179,16 +188,10 @@ static void controller_sdl_read(OSContPad *pad) {
 
     if (sdl_cntrl == NULL) {
         for (int i = 0; i < SDL_NumJoysticks(); i++) {
-            if (SDL_IsGameController(i)) {
+            if ( GetJoystickNumAxes(i) > 0 ) {
                 sdl_cntrl = SDL_GameControllerOpen(i);
-                if (sdl_cntrl != NULL) {
-                    sdl_haptic = controller_sdl_init_haptics(i);
-                    break;
-                }
+                break;
             }
-        }
-        if (sdl_cntrl == NULL) {
-            return;
         }
     }
 
