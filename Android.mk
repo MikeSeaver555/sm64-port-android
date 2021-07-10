@@ -13,16 +13,16 @@ SDL_PATH := ../SDL
 VERSION ?= us
 
 # Use touch controls
-TOUCH_CONTROLS ?= 1
+TOUCH_CONTROLS ?= 0
 
 # Disable text-based save-files by default
-TEXTSAVES ?= 0
+TEXTSAVES ?= 1
 
 # Enable extended options menu by default
 EXT_OPTIONS_MENU ?= 1
 
 # Load resources from external files
-EXTERNAL_DATA ?= 0
+EXTERNAL_DATA ?= 1
 BASEDIR ?= res
 
 ifeq ($(VERSION),jp)
