@@ -34,7 +34,7 @@ OSX_BUILD ?= 0
 TARGET_ARCH ?= native
 TARGET_BITS ?= 0
 
-TOUCH_CONTROLS ?= 1
+TOUCH_CONTROLS ?= 0
 # Disable better camera by default
 BETTERCAMERA ?= 0
 # Disable no drawing distance by default
@@ -44,9 +44,9 @@ TEXTURE_FIX ?= 0
 # Enable extended options menu by default
 EXT_OPTIONS_MENU ?= 1
 # Disable text-based save-files by default
-TEXTSAVES ?= 0
+TEXTSAVES ?= 1
 # Load resources from external files
-EXTERNAL_DATA ?= 0
+EXTERNAL_DATA ?= 1
 # Enable Discord Rich Presence
 DISCORDRPC ?= 0
 
