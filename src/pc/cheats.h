@@ -14,6 +14,7 @@ struct CheatList {
     bool         HugeMario;
     bool         TinyMario;
     bool         LevelReset;
+    unsigned int BLJAnywhere;
 };
 
 extern struct CheatList Cheats;
