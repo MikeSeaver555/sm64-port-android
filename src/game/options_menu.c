@@ -266,9 +266,10 @@ void unpause_game() {
 
 static void optmenu_reset_game(UNUSED struct Option *self, s32 arg) {
     if (!arg) {
+        save_file_erase(0); // delete saved game from slot 1 to speedrun
         optmenu_toggle();
         unpause_game();
-        fade_into_special_warp(-2, 0); // only exit on A press and not directions
+        fade_into_special_warp(-2, 0); // only exit on A press and not directions 
 	}
 }
 
