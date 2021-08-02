@@ -1434,6 +1434,11 @@ void update_mario_inputs(struct MarioState *m) {
         m->numCoins = 0;
         gHudDisplay.coins = 0;
         sWarpDest.type = 2;
+        if (Cheats.Timer && Cheats.EnableCheats) {
+            gHudDisplay.timer = 0;
+        } else {
+            level_control_timer(TIMER_CONTROL_HIDE);
+        }
     }
     /* End of level reset cheat */
 
