@@ -1,69 +1,86 @@
-# sm64ex Android Port
-If you want to compile Super Mario 64 for Android on PC you'll probably want to clone [this repo](https://github.com/VDavid003/sm64-port-android-base) instead!
-If you want to compile on Android using [Termux](https://play.google.com/store/apps/details?id=com.termux), follow these instructions in Termux:
+### IMPORTANT 
+
+I did almost nothing. This is a fork of sm64-port-android made it by VDavid003 which it has as starting point the sm64 project made by n64decomp. I just made some little changes according to my preferences, I included code from other people and projects to the VDavid003's one. There are a bunch of clever folks behind all this work, I apologize if I don't mention all of them.
+
+### Who is this aimed for?
+
+This repository is aimed to people who own a Super Mario 64 ROM and want to play it on Android natively. An Android TV with a gamepad should be a good option, I tested it on a Nvidia Shield TV. In my opinion it runs lot of better than the emulation through Mupen64Plus FZ, at least on July 2021. It's recommended to know a little bit about basic linux commands and Android folders structure.
+
+### Features and clarifications:
+
+- This repository is only for Android
+- The game runs natively, there is no emulation.
+- You must own a Super Mario 64 ROM in .z64 format, I just tried with the US version, so the process is adapted to it.
+- It runs at full screen, all characters and scenearios preserve their original aspect ratio, just the viewport will be automatically adapted to the display.
+- It's expected to be used with a gamepad with at least one analog stick, this project tries to identify the right controller automatically, if the controller you were expecting to use is not the one working try disconnecting the other ones. If you are using a Nvidia Shield with gamepad, it should work.
+- Touch controls are hidden because it's supossed to be playing with a gamepad.
+- Game Options menu available after pressing R when you pause the game.
+- Cheats menu available pressing L button three times in the Game Options menu, a sound should be played.
+- Reset level by pressing L can be enable in cheats menu.
+- Reset game and Exit game are in Game Options menu.
+- Default keybindings for controller should let you use analog stick and d-pad for movements, if some buttons don't work you can try mapping them through Game Menu > Controls.
+- BLJ (Back Long Jump) anywhere can be activated in cheats menu.
+- Mode Non-Stop available in cheats menu.
+- Editable Savefile with a text editor, there is also a 120 stars saved file included.
+- Start button lets you leave the ending scene.
+- Optional (but recommended) patch to work a 60 fps.
+
+### Instructions:
+
+The .apk and the necessary files will be built using Android.
+You will need install Termux for this process but don't download it from Play Store, that version is outdated, take it from [f-droid](https://f-droid.org/en/packages/com.termux/). Once Termux is installed I suggest you to connect a keyboard and follow these steps:
 
 **Install dependencies:**
-```sh
+```
 pkg install git wget make python getconf zip apksigner clang
 ```
 
-**Clone the repository:**
-```sh
-git clone https://github.com/VDavid003/sm64-port-android --branch ex/nightly
-cd sm64-port-android
+**Clone this repository:**
+```
+git clone https://github.com/MikeSeaver555/sm64-port-nvidia-shield
+cd sm64-port-nvidia-shield/
 ```
 
-**Copy in your baserom:**
+**Copy baserom:**
 
-Do this using your default file manager (on AOSP, you can slide on the left and there will be a "Termux" option there), or using Termux
-```sh
+Your Super Mario 64 ROM must be a .z64 format. This process is for the US version.
+Grant permission to Termux to be able to write in your storage system and then copy the file with the indicated name.
+
+```
 termux-setup-storage
-cp /sdcard/path/to/your/baserom.z64 ./baserom.us.z64
+cp /sdcard/path/to/your/rom.z64 ./baserom.us.z64
 ```
 
 **Get SDL includes:**
-```sh
+```
 ./getSDL.sh
 ```
 
+**Apply 60 fps patch (optionally)**
+```
+git apply enhancements/60fps_ex.patch
+```
+
 **Build:**
-```sh
+```
 # if you have more cores available, you can increase the --jobs parameter
-make --jobs 4
+# Take in consideration that you can run out of RAM during the process even with Nvidia Shield, so I recommend using 2
+
+make --jobs 2
 ```
 
-**Enjoy your apk:**
-```sh
-ls -al build/us_pc/sm64.us.f3dex2e.apk
+**Adapt the following commands according to your preferences:**
+
+Copy the resulting files into a folder you can access later with a file browser.
+```
+mkdir -p ../storage/shared/SM64Android/com.vdavid003.sm64port/files
+cp -f build/us_pc/sm64.us.f3dex2e.apk ../storage/shared/SM64Android/
+cp -f build/us_pc/res/base.zip ../storage/shared/SM64Android/com.vdavid003.sm64port/files/
+cp -f savefile/sm64_save_file_3.sav ../storage/shared/SM64Android/com.vdavid003.sm64port/files/
 ```
 
-# sm64ex
-Fork of [sm64-port/sm64-port](https://github.com/sm64-port/sm64-port) with additional features. 
+**Last Steps:**
 
-Feel free to report bugs and contribute, but remember, there must be **no upload of any copyrighted asset**. 
-Run `./extract_assets.py --clean && make clean` or `make distclean` to remove ROM-originated content.
-
-Please contribute **first** to the [nightly branch](https://github.com/sm64pc/sm64ex/tree/nightly/). New functionality will be merged to master once they're considered to be well-tested.
-
-*Read this in other languages: [Español](README_es_ES.md), [Português](README_pt_BR.md) or [简体中文](README_zh_CN.md).*
-
-## New features
-
- * Options menu with various settings, including button remapping.
- * Optional external data loading (so far only textures and assembled soundbanks), providing support for custom texture packs.
- * Optional analog camera and mouse look (using [Puppycam](https://github.com/FazanaJ/puppycam)).
- * Optional OpenGL1.3-based renderer for older machines, as well as the original GL2.1, D3D11 and D3D12 renderers from Emill's [n64-fast3d-engine](https://github.com/Emill/n64-fast3d-engine/).
- * Option to disable drawing distances.
- * Optional model and texture fixes (e.g. the smoke texture).
- * Skip introductory Peach & Lakitu cutscenes with the `--skip-intro` CLI option
- * Cheats menu in Options (activate with `--cheats` or by pressing L thrice in the pause menu).
- * Support for both little-endian and big-endian save files (meaning you can use save files from both sm64-port and most emulators), as well as an optional text-based save format.
-
-Recent changes in Nightly have moved the save and configuration file path to `%HOMEPATH%\AppData\Roaming\sm64ex` on Windows and `$HOME/.local/share/sm64ex` on Linux. This behaviour can be changed with the `--savepath` CLI option.
-For example `--savepath .` will read saves from the current directory (which not always matches the exe directory, but most of the time it does);
-   `--savepath '!'` will read saves from the executable directory.
-
-## Building
-For building instructions, please refer to the [wiki](https://github.com/sm64pc/sm64ex/wiki).
-
-**Make sure you have MXE first before attempting to compile for Windows on Linux and WSL. Follow the guide on the wiki.**
+Use a file manager and access to SM64Android folder you created in the last step.
+Copy the folder com.vdavid003.sm64port inside your Android/data folder
+Install the .apk using a file browser and enjoy it.
