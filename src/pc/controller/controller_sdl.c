@@ -188,7 +188,7 @@ static void controller_sdl_read(OSContPad *pad) {
 
     if (sdl_cntrl == NULL) {
         for (int i = 0; i < SDL_NumJoysticks(); i++) {
-            if ( GetJoystickNumAxes(i) > 0 ) {
+            if ( (GetJoystickNumAxes(i) > 0) && (SDL_GameControllerNameForIndex(i) != NULL) ) {
                 sdl_cntrl = SDL_GameControllerOpen(i);
                 break;
             }
