@@ -87,6 +87,7 @@
 #define TEXT_OPT_CHEAT10   _("LEVEL RESET (PRESS L)")
 #define TEXT_OPT_CHEAT11   _("BLJ ANYWHERE")
 #define TEXT_OPT_CHEAT12   _("Non-Stop Mode")
+#define TEXT_OPT_CHEAT13   _("TIMER")
 
 #define TEXT_OPT_BLJCHT1  _("DISABLED")
 #define TEXT_OPT_BLJCHT2  _("ENABLED")
@@ -172,6 +173,7 @@
 #define TEXT_OPT_CHEAT10   _("Level Reset (Press L)")
 #define TEXT_OPT_CHEAT11   _("BLJ Anywhere")
 #define TEXT_OPT_CHEAT12   _("Non-Stop Mode")
+#define TEXT_OPT_CHEAT13   _("TIMER")
 
 #define TEXT_OPT_BLJCHT1  _("Disabled")
 #define TEXT_OPT_BLJCHT2  _("Enabled")

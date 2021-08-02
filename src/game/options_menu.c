@@ -105,6 +105,7 @@ static const u8 optsCheatsStr[][64] = {
     { TEXT_OPT_CHEAT10 },
     { TEXT_OPT_CHEAT11 },
     { TEXT_OPT_CHEAT12 },
+    { TEXT_OPT_CHEAT13 },
 };
 
 static const u8 bindStr[][32] = {
@@ -350,6 +351,7 @@ static struct Option optsCheats[] = {
     DEF_OPT_TOGGLE( optsCheatsStr[9], &Cheats.LevelReset ),
 	DEF_OPT_CHOICE( optsCheatsStr[10], &Cheats.BLJAnywhere, bljCheatChoices ),
 	DEF_OPT_CHOICE( optsCheatsStr[11], &Cheats.NON, stayInLevelChoices),
+    DEF_OPT_TOGGLE( optsCheatsStr[12], &Cheats.Timer ),
 };
 
 /* submenu definitions */

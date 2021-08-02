@@ -966,6 +966,9 @@ static u32 set_mario_action_cutscene(struct MarioState *m, u32 action, UNUSED u3
             break;
 
         case ACT_FALL_AFTER_STAR_GRAB:
+            if (Cheats.Timer && Cheats.EnableCheats) {
+                level_control_timer(TIMER_CONTROL_STOP);
+            }
             mario_set_forward_vel(m, 0.0f);
             break;
 

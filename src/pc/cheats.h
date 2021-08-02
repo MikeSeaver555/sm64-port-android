@@ -16,6 +16,7 @@ struct CheatList {
     unsigned int NON;
     bool         LevelReset;
     unsigned int BLJAnywhere;
+    bool         Timer;
 };
 
 extern struct CheatList Cheats;

@@ -34,6 +34,7 @@
 #include "pc/pc_main.h"
 #include "pc/cliopts.h"
 #include "pc/configfile.h"
+#include "pc/cheats.h"
 
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
@@ -435,9 +436,9 @@ void init_mario_after_warp(void) {
         }
 
 #ifndef VERSION_JP
-        if (gCurrLevelNum == LEVEL_BOB
+        if ((gCurrLevelNum == LEVEL_BOB
             && get_current_background_music() != SEQUENCE_ARGS(4, SEQ_LEVEL_SLIDE)
-            && sTimerRunning != 0) {
+            && sTimerRunning != 0) && !(Cheats.Timer && Cheats.EnableCheats)) {
             play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_LEVEL_SLIDE), 0);
         }
 #endif
@@ -464,7 +465,9 @@ void init_mario_after_warp(void) {
 void warp_area(void) {
     if (sWarpDest.type != WARP_TYPE_NOT_WARPING) {
         if (sWarpDest.type == WARP_TYPE_CHANGE_AREA) {
-            level_control_timer(TIMER_CONTROL_HIDE);
+            if (!(Cheats.Timer && Cheats.EnableCheats)) {
+                level_control_timer(TIMER_CONTROL_HIDE);
+            }
             unload_mario_area();
             load_area(sWarpDest.areaIdx);
         }
@@ -476,9 +479,19 @@ void warp_area(void) {
 // used for warps between levels
 void warp_level(void) {
     gCurrLevelNum = sWarpDest.levelNum;
-
+    if (Cheats.Timer && Cheats.EnableCheats) {
+        if (sWarpDest.levelNum != LEVEL_CASTLE
+                && sWarpDest.levelNum != LEVEL_CASTLE_GROUNDS && sWarpDest.levelNum != LEVEL_ENDING
+                && sWarpDest.levelNum != LEVEL_CASTLE_COURTYARD && sWarpDest.levelNum != LEVEL_PSS
+                && sWarpDest.levelNum != LEVEL_NONE){
+            level_control_timer(TIMER_CONTROL_SHOW);
+            level_control_timer(TIMER_CONTROL_START);
+        } else {
+            level_control_timer(TIMER_CONTROL_HIDE);
+        }
+    } else {
     level_control_timer(TIMER_CONTROL_HIDE);
-
+    }
     load_area(sWarpDest.areaIdx);
     init_mario_after_warp();
 }
