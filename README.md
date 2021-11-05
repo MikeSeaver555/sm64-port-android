@@ -37,7 +37,7 @@ pkg install git wget make python getconf zip apksigner clang
 
 **Clone this repository:**
 ```
-git clone https://github.com/MikeSeaver555/sm64-port-nvidia-shield
+git clone https://github.com/MikeSeaver555/sm64-port-nvidia-shield --branch testing
 cd sm64-port-nvidia-shield/
 ```
 
